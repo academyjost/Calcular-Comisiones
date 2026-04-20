@@ -14,7 +14,23 @@ function calcular(){
     let componenteVentas = document.getElementById("txtVentas");
     let componentePrecio = document.getElementById("txtPrecio");
 
-    let sueldoBaseStr = parseFloat(componenteSueldoBase.value);
-    let numeroVentasStr = parseInt(componenteVentas.value);
-    let precioProductoStr = parseFloat(componentePrecio.value);
+    let sueldoBaseStr = componenteSueldoBase.value;
+    let numeroVentasStr = componenteVentas.value;
+    let precioProductoStr = componentePrecio.value;
+
+    let sueldoBase = parseFloat(sueldoBaseStr);
+    let numeroVentas = parseInt(numeroVentasStr);
+    let precioProducto = parseFloat(precioProductoStr);
+    
+    let comision = calcularComision(numeroVentas, precioProducto);
+
+    let total = sueldoBase + comision;
+    
+    let spSueldoBase = document.getElementById("spSueldoBase");
+    let spComision = document.getElementById("spComision");
+    let spTotal = document.getElementById("spTotal");
+
+    spSueldoBase.textContent = sueldoBase.toFixed(2);
+    spComision.textContent = comision.toFixed(2);
+    spTotal.textContent = total.toFixed(2);
 }
