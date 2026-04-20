@@ -1,43 +1,62 @@
 const VENTAS_BASEE = 5;
 
-function calcularComision(numeroVentas,PrecioProducto){
+// Nueva función para manejar el teclado
+function evaluarEnter(event) {
+    if (event.key === "Enter") {
+        calcular();
+    }
+}
+
+function calcularComision(numeroVentas, PrecioProducto) {
     let comision = 0;
     if (numeroVentas > VENTAS_BASEE) {
         let ventasExtra = numeroVentas - VENTAS_BASEE;
-        comision = ventasExtra * (PrecioProducto * 0.1); // 10% de comisión por cada venta extra
+        // 10% de comisión por cada venta extra
+        comision = ventasExtra * (PrecioProducto * 0.10); 
     }
     return comision;
 }
 
-function calcular(){
-    //let componenteSueldoBase = document.getElementById("txtSueldoBase");
-    //let componenteVentas = document.getElementById("txtVentas");
-    //let componentePrecio = document.getElementById("txtPrecio");
+function validarCampo(id) {
+    let valor = recuperarTexto(id);
+    let esValido = true;
+    let mensaje = "";
 
+    if (valor.trim() === "") {
+        mensaje = "Requerido";
+        esValido = false;
+    } else if (isNaN(valor)) {
+        mensaje = "Solo números";
+        esValido = false;
+    }
 
-    //let sueldoBaseStr = componenteSueldoBase.value;
+    mostrarError(id, mensaje);
+    return esValido;
+}
 
-    //let sueldoBaseStr = recuperarTexto("txtSueldoBase");
-    //let numeroVentasStr = recuperarTexto("txtVentas");
-    //let precioProductoStr = recuperarTexto("txtPrecio");
+function mostrarEnSpan(id, texto) {
+    let componente = document.getElementById(id);
+    if (componente) {
+        componente.textContent = texto;
+    }
+}
 
+function calcular() {
+    let v1 = validarCampo("txtSueldoBase");
+    let v2 = validarCampo("txtVentas");
+    let v3 = validarCampo("txtPrecio");
 
-    //let numeroVentasStr = componenteVentas.value;
-    //let precioProductoStr = componentePrecio.value;
+    if (!v1 || !v2 || !v3) return;
 
     let sueldoBase = recuperarFloat("txtSueldoBase");
     let numeroVentas = recuperarFloat("txtVentas");
     let precioProducto = recuperarFloat("txtPrecio");
-    
+
     let comision = calcularComision(numeroVentas, precioProducto);
-
     let total = sueldoBase + comision;
-    
-    let spSueldoBase = document.getElementById("spSueldoBase");
-    let spComision = document.getElementById("spComision");
-    let spTotal = document.getElementById("spTotal");
 
-    spSueldoBase.textContent = sueldoBase.toFixed(2);
-    spComision.textContent = comision.toFixed(2);
-    spTotal.textContent = total.toFixed(2);
+    // Formateo de moneda
+    mostrarEnSpan("spSueldoBase", `$${sueldoBase.toFixed(2)}`);
+    mostrarEnSpan("spComision", `$${comision.toFixed(2)}`);
+    mostrarEnSpan("spTotal", `$${total.toFixed(2)}`);
 }

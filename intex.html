@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora de Comisiones</title>
+    <title>Calculadora de Comisiones | Elite</title>
     <link rel="stylesheet" href="ventas.css">
     <script src="ventas.js"></script>
     <script src="utilitarios.js"></script>
@@ -10,25 +10,40 @@
 <body>
 
     <div class="contenedor">
-        <h1>Calculadora de Comisiones</h1>
+        <header>
+            <h1>Sistema de Comisiones</h1>
+            <p class="subtitle">Gestión de Ventas de Lujo</p>
+        </header>
 
-        <label>Salario Base:</label>
-        <input type="text" id="txtSueldoBase">
+        <div class="formulario">
+            <label>Salario Base</label>
+            <input type="text" id="txtSueldoBase" placeholder="0.00" onkeypress="evaluarEnter(event)">
 
-        <label>Número de ventas:</label>
-        <input type="text" id="txtVentas">
+            <label>Unidades Vendidas</label>
+            <input type="text" id="txtVentas" placeholder="Ej: 10" onkeypress="evaluarEnter(event)">
 
-        <label>Precio del producto:</label>
-        <input type="text" id="txtPrecio">
+            <label>Precio Unitario</label>
+            <input type="text" id="txtPrecio" placeholder="0.00" onkeypress="evaluarEnter(event)">
 
-        <button onclick="calcular()">Calcular Comisión</button>
+            <button onclick="calcular()">CALCULAR TOTAL</button>
+        </div>
 
-        <h2>Resultados</h2>
-        <p>Salario Base: <span id="spSueldoBase"></span></p>
-        <p>Comisión: <span id="spComision"></span></p>
-        <p>Total: <span id="spTotal"></span></p>
+        <section class="resultados">
+            <div class="fila-resultado">
+                <span>Salario Base</span>
+                <span id="spSueldoBase">$0.00</span>
+            </div>
+            <div class="fila-resultado">
+                <span>Comisión Ganada</span>
+                <span id="spComision">$0.00</span>
+            </div>
+            <hr>
+            <div class="fila-resultado total">
+                <span>TOTAL A PAGAR</span>
+                <span id="spTotal">$0.00</span>
+            </div>
+        </section>
     </div>
-
     
 </body>
 </html>
